@@ -18,6 +18,11 @@ public class UsuarioResource {
         this.service = service;
     }
 
+    @GetMapping("/")
+    public String Hello() {
+        return "hello world!";
+    }
+
     @PostMapping
     public ResponseEntity salvar(@RequestBody UsuarioDTO dto) {
         Usuario usuario = new Usuario.Builder(dto.getEmail(), dto.getNome(), dto.getSenha()).build();
