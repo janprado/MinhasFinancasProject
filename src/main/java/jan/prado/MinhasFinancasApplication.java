@@ -1,4 +1,4 @@
-package jan.prado.minhasfinancas;
+package jan.prado;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,5 +9,7 @@ public class MinhasFinancasApplication {
     public static void main(String[] args) {
         SpringApplication.run(MinhasFinancasApplication.class, args);
     }
+
+
 
 }

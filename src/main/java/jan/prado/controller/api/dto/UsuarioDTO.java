@@ -65,6 +65,8 @@ public class UsuarioDTO {
         public Builder (String email,String nome, String senha){
             this.email = email;
             this.nome = nome;
+
+
             this.senha = senha;
         }
 

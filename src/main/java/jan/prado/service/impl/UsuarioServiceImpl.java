@@ -1,4 +1,5 @@
 package jan.prado.service.impl;
+
 import jan.prado.exception.ErroAutenticacao;
 import jan.prado.exception.RegraNegocioException;
 import jan.prado.model.entity.Usuario;
@@ -6,6 +7,8 @@ import jan.prado.model.repository.UsuarioRepository;
 import jan.prado.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -13,7 +16,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private UsuarioRepository repository;
 
-    @Autowired
     public UsuarioServiceImpl(UsuarioRepository repository) {
         super();
         this.repository = repository;
@@ -22,16 +24,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Usuario autenticar(String email, String senha) {
         Optional<Usuario> usuario = repository.findByEmail(email);
-        if (usuario.isPresent()) {
+        if (!usuario.isPresent()) {
             throw new ErroAutenticacao("Usuario nao encontrado.");
         }
-        if (usuario.get().getSenha().equals(senha)) {
+        if (!usuario.get().getSenha().equals(senha)) {
             throw new ErroAutenticacao("Senha invalida.");
         }
         return usuario.get();
     }
 
     @Override
+    @Transactional
     public Usuario salvarUsuario(Usuario usuario) {
         validarEmail(usuario.getEmail());
 

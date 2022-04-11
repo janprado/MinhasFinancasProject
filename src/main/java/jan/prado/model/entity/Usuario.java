@@ -9,7 +9,6 @@ import java.util.Objects;
 @Table(name = "usuario", schema = "financas")
 public class Usuario {
 
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +22,9 @@ public class Usuario {
 
     @Column(name = "senha")
     private String senha;
+
+    public Usuario() {
+    }
 
     public long getId() {
         return id;
